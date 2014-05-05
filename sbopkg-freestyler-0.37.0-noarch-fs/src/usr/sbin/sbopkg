@@ -2944,24 +2944,13 @@ check_cert_prompt() {
     local REPLY
 
     echo
-    crunch_fmt "$SCRIPT: Some https download errors can be worked around \
-        by temporarily adding '--no-check-certificate' to WGETFLAGS. If \
-        unsure, see the wget manual on the use of this flag."
+    crunch_fmt "$SCRIPT: Some https download errors ... \
+        attemting --no-check-certificate workaround"
     echo
-    while :; do
-        printf "Would you like to have sbopkg attempt this? [Y/n]: "
-        error_read
-        case $REPLY in
-            Y|y|'')
-                echo "Re-trying with '--no-check-certificate'."
-                echo
+
                 TWGETFLAGS+=" --no-check-certificate"
                 return
-                ;;
-            N|n) return 1 ;;
-            *) unknown_response ;;
-        esac
-    done
+
 }
 
 get_source() {
